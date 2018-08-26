@@ -14,6 +14,8 @@ class TaskDAO:
         user = UserModel.find_by_id(user_id)
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
 
         relation = MentorshipRelationModel.find_by_id(_id=mentorship_relation_id)
         if relation is None:
@@ -34,6 +36,8 @@ class TaskDAO:
         user = UserModel.find_by_id(user_id)
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
 
         relation = MentorshipRelationModel.find_by_id(mentorship_relation_id)
         if relation is None:
@@ -52,6 +56,8 @@ class TaskDAO:
         user = UserModel.find_by_id(user_id)
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
 
         relation = MentorshipRelationModel.find_by_id(mentorship_relation_id)
         if relation is None:
@@ -74,6 +80,8 @@ class TaskDAO:
         user = UserModel.find_by_id(user_id)
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
 
         relation = MentorshipRelationModel.find_by_id(mentorship_relation_id)
         if relation is None:

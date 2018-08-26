@@ -17,11 +17,14 @@ class MentorshipRelationDAO:
         mentee_id = data['mentee_id']
         end_date_timestamp = data['end_date']
         notes = data['notes']
+        user = UserModel.find_by_id(user_id)
 
         # user_id has to match either mentee_id or mentor_id
         is_valid_user_ids = action_user_id == mentor_id or action_user_id == mentee_id
         if not is_valid_user_ids:
             return {'message': 'Your ID has to match either Mentor or Mentee IDs.'}, 400
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
 
         # mentor_id has to be different from mentee_id
         if mentor_id == mentee_id:
@@ -108,6 +111,8 @@ class MentorshipRelationDAO:
 
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
 
         all_relations = user.mentor_relations + user.mentee_relations
 
@@ -125,6 +130,9 @@ class MentorshipRelationDAO:
         # verify if user exists
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
+
 
         request = MentorshipRelationModel.find_by_id(request_id)
 
@@ -165,6 +173,9 @@ class MentorshipRelationDAO:
         # verify if user exists
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
+
 
         request = MentorshipRelationModel.find_by_id(request_id)
 
@@ -198,6 +209,9 @@ class MentorshipRelationDAO:
         # verify if user exists
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
+
 
         request = MentorshipRelationModel.find_by_id(relation_id)
 
@@ -227,6 +241,9 @@ class MentorshipRelationDAO:
         # verify if user exists
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
+
 
         request = MentorshipRelationModel.find_by_id(request_id)
 
@@ -255,6 +272,9 @@ class MentorshipRelationDAO:
         # verify if user exists
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
+
 
         now_timestamp = datetime.now().timestamp()
         past_relations = []
@@ -275,6 +295,9 @@ class MentorshipRelationDAO:
         # verify if user exists
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
+
 
         all_relations = user.mentor_relations + user.mentee_relations
 
@@ -293,6 +316,8 @@ class MentorshipRelationDAO:
         # verify if user exists
         if user is None:
             return {'message': 'User does not exist.'}, 404
+        if not user.is_email_verified:
+            return {'message': 'User doesnot have email Verified.'}, 404
 
         now_timestamp = datetime.now().timestamp()
         pending_requests = []
